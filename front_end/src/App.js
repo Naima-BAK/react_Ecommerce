@@ -7,8 +7,9 @@ import Home from "./components/frontend/Home";
 import Login from "./components/frontend/auth/Login";
 import Register from "./components/frontend/auth/Register";
 import axios from "axios";
+import Page_403 from './components/errors/Page_403'
 import AdminPrivateRoute from "./AdminPrivateRoute";
-import PageNotFound from "./PageNotFound";
+import PageNotFound from "./components/errors/PageNotFound";
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Accept'] = 'application/json';
@@ -27,14 +28,18 @@ function App() {
       {/* nested routes */}
       <Router>
         <Routes>
+
           <Route exact path="/" element={<Home />} />
-          {/* <Route exact path="/login" element={<Login />} /> */}
+
           <Route exact path="/register" element={<Register />} />
+
           <Route path="*" element={<PageNotFound />} />
+
           <Route exact path="/login" element={localStorage.getItem('auth_token') ? <Navigate to='/' replace /> : <Login />} />
 
+          <Route path="/403" element={<Page_403 />} />
 
-          {/* <Route path="/admin" element={<AdminPrivateRoute Component={MasterLayout} />} > */}
+          {/* Admin routes */}
           <Route path="/admin" element={<AdminPrivateRoute><MasterLayout /></AdminPrivateRoute>} >
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/profile' element={<Profile />} />
