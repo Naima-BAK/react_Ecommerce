@@ -10,6 +10,9 @@ import axios from "axios";
 import Page_403 from './components/errors/Page_403'
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import PageNotFound from "./components/errors/PageNotFound";
+import Category from "./components/admin/category/Category";
+import AddCategory from "./components/admin/category/AddCategory";
+
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Accept'] = 'application/json';
@@ -42,6 +45,10 @@ function App() {
           {/* Admin routes */}
           <Route path="/admin" element={<AdminPrivateRoute><MasterLayout /></AdminPrivateRoute>} >
             <Route path='/admin/dashboard' element={<Dashboard />} />
+            <Route path='/admin/category' element={<Category />} />
+            <Route path='/admin/Addcategory' element={<AddCategory />} />
+
+
             <Route path='/admin/profile' element={<Profile />} />
             <Route index element={<Navigate to="/admin/dashboard" />} />
           </Route>
