@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\CategoryController;
 
 
 
@@ -15,7 +16,15 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){
         return response()->json(['message' => 'you are in', 'status' => 200],200);
     });
 
+    // Category :
+    Route::post('add_Category',[CategoryController::class,'store']);
+
+
 });
+
+
+
+
 Route::middleware(['auth:sanctum'])->group(function(){
 
     
