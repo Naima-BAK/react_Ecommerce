@@ -17,7 +17,11 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){
     });
 
     // Category :
+    //la fonction store pour ajouter les données de la catégorie à la base de données
     Route::post('add_Category',[CategoryController::class,'store']);
+    // index : pour afficher les données de la table categories
+    Route::get('view_category',[CategoryController::class,'index']);
+
 
 
 });

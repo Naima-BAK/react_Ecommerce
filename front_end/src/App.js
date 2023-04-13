@@ -47,8 +47,7 @@ function App() {
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/category' element={<Category />} />
             <Route path='/admin/Addcategory' element={<AddCategory />} />
-
-
+            <Route path='/admin/ViewCategory' element={<Category />} />
             <Route path='/admin/profile' element={<Profile />} />
             <Route index element={<Navigate to="/admin/dashboard" />} />
           </Route>

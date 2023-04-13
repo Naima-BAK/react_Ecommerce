@@ -9,7 +9,20 @@ use Illuminate\Support\Facades\Validator;
 class CategoryController extends Controller
 {
        
-       
+               // index : pour afficher les données de la table categories
+               public function index()
+               {
+                // all() : get all from categories table
+                   $category = Category::all();
+                   return response()->json([
+                       'status'=>200,
+                       'category'=>$category,
+                   ]);
+               }
+
+
+                // ----------------------------------------------------
+                //la fonction store pour ajouter les données de la catégorie à la base de données
                 public function store(Request $request){
                     
                     //systeme de validation des inputs :
@@ -46,6 +59,9 @@ class CategoryController extends Controller
                         ]);
                     }
                 }
-            
+
+
+
+              
           
 }
