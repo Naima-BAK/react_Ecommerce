@@ -12,6 +12,7 @@ import AdminPrivateRoute from "./AdminPrivateRoute";
 import PageNotFound from "./components/errors/PageNotFound";
 import Category from "./components/admin/category/Category";
 import AddCategory from "./components/admin/category/AddCategory";
+import EditCategory from "./components/admin/category/EditCategory";
 
 axios.defaults.baseURL = "http://localhost:8000/";
 axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -48,6 +49,8 @@ function App() {
             <Route path='/admin/category' element={<Category />} />
             <Route path='/admin/Addcategory' element={<AddCategory />} />
             <Route path='/admin/ViewCategory' element={<Category />} />
+            <Route path='/admin/EditCategory/:id' element={<EditCategory />} />
+
             <Route path='/admin/profile' element={<Profile />} />
             <Route index element={<Navigate to="/admin/dashboard" />} />
           </Route>

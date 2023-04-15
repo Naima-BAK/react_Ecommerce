@@ -60,7 +60,7 @@ export default function AddCategory() {
 
 
                 <div className="form-check mb-3">
-                    <label className="form-check-label" htmlFor="statusCheck">Status</label>
+                    <label className="form-check-label" >Status</label>
                     <input id="statusCheck" className='form-check-input' type="checkbox" name='status' onChange={handlInput} value={categoryInput.status} />
                 </div>
                 <div className="form-group">

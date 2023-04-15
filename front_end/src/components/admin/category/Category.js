@@ -1,11 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import EditCategory from './EditCategory';
 
 export default function Category() {
 
     const [loading, setLoading] = useState(true);
     const [category_list, setCategory_list] = useState([]);
+
+    const [modalShow, setModalShow] = useState(false);
+    const [editModalShow, setEditModalShow] = useState(false);
+    const [toEdit, setToEdit] = useState({});
 
     // On utilise useEffect pour indiquer que notre composant doit exécuter quelque chose après chaque affichage
     useEffect(() => {
@@ -30,6 +35,7 @@ export default function Category() {
             // La .map()méthode vous permet d'exécuter une fonction sur chaque élément du tableau, renvoyant un nouveau tableau comme résultat.
             category_list.map((item) => {
                 return (
+
                     <div key={item.id} className="mx-0 row border-bottom border-200 text-center">
                         <div className='py-3 col-1 text-start'>{item.id}</div>
                         <div className='py-3 col-2'>{item.name}</div>
@@ -38,8 +44,9 @@ export default function Category() {
                         <div className='py-3 col-2'>{item.status}</div>
                         <div className='py-3 col-2 text-center'>
                             <div className='row'>
-                                <div className='col-6'><Link to="#" className='btn btn-success btn-sm'>Edit</Link></div>
-                                <div className='col-6'><button type='button' className='btn btn-danger btn-sm'>Delete</button></div>
+                                <div className='col-6'><Link to={`/admin/EditCategory/${item.id}`} className='btn btn-success btn-sm p-0'>edit</Link></div>
+
+                                <div className='col-6'><button type='button' className='btn btn-danger btn-sm p-0'>delete</button></div>
                             </div>
                         </div>
                     </div>
@@ -67,6 +74,8 @@ export default function Category() {
                     {viewCategory_HTMLTABLE}
                 </div>
             </div>
+
+
 
         </div>
     )

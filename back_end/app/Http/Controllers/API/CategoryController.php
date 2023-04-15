@@ -61,6 +61,72 @@ class CategoryController extends Controller
                 }
 
 
+                public function edit($id)
+                {
+                    $category = Category::find($id);
+                    if($category)
+                    {
+                        return response()->json([
+                            'status'=>200,
+                            'category'=>$category
+                        ]);
+                    }
+                    else
+                    {
+                        return response()->json([
+                            'status'=>404,
+                            'message'=>'Catégorie non trouvé!'
+                        ]);
+                    }
+                }
+
+
+
+                public function update(Request $request, $id){
+                    $validator = Validator::make($request->all(), [
+                        'slug'=>'required|max:191',
+                        'name'=>'required|max:191',
+                    ],
+                    [
+                        'slug.required'=>'Le champ Slug est obligatoire.',
+                        'slug.max'=>'La longueur du Slug est trop longue. La longueur maximale est de 191.',
+                        'name.required'=>'Le champ Nom est obligatoire.',
+                        'name.max'=>'La longueur du nom est trop longue. La longueur maximale est de 191.',
+                    ]);
+                
+                    if($validator->fails())
+                    {
+                        return response()->json([
+                            'status'=>422,
+                            'errors'=>$validator->getMessageBag(),
+                        ]);
+                    }
+                    else
+                    {
+                        $category = Category::find($id);
+                        if($category)
+                        {
+                            $category->slug = $request->input('slug');
+                            $category->name = $request->input('name');
+                            $category->description = $request->input('description');
+                            $category->save();
+                            return response()->json([
+                                'status'=>200,
+                                'message'=>'Catégorie mise à jour avec succès',
+                            ]);
+                        }
+                        else
+                        {
+                            return response()->json([
+                                'status'=>404,
+                                'message'=>'Catégorie non trouvé!'
+                            ]);
+                        }
+                    }
+                }
+
+
+
 
               
           

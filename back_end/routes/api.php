@@ -21,6 +21,8 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){
     Route::post('add_Category',[CategoryController::class,'store']);
     // index : pour afficher les données de la table categories
     Route::get('view_category',[CategoryController::class,'index']);
+    Route::get('edit_category/{id}',[CategoryController::class,'edit']);
+    Route::put('update_category/{id}',[CategoryController::class,'update']);
 
 
 
