@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import EditCategory from './EditCategory';
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 export default function Category() {
 
@@ -22,6 +24,29 @@ export default function Category() {
             setLoading(false);
         })
     }, []);
+
+
+
+    const deleteCategory = (e, id) => {
+        e.preventDefault();
+
+        const thisClicked = e.currentTarget;
+        thisClicked.innerText = "Deleting";
+
+        axios.delete(`/api/delete_category/${id}`).then(res => {
+            if (res.data.status === 200) {
+                const items = category_list.filter(itemC => itemC.id !== id);
+                setCategory_list(items)
+                Swal.fire("Success", res.data.message, "success");
+            }
+            else if (res.data.status === 404) {
+                Swal.fire("Erreur", res.data.message, "error")
+                thisClicked.innerText = "Delete";
+            }
+
+        })
+
+    }
 
     var viewCategory_HTMLTABLE = [];
     if (loading) {
@@ -46,7 +71,7 @@ export default function Category() {
                             <div className='row'>
                                 <div className='col-6'><Link to={`/admin/EditCategory/${item.id}`} className='btn btn-success btn-sm p-0'>edit</Link></div>
 
-                                <div className='col-6'><button type='button' className='btn btn-danger btn-sm p-0'>delete</button></div>
+                                <button type="button" onClick={(e) => deleteCategory(e, item.id)} className="btn btn-danger btn-sm">Delete</button>
                             </div>
                         </div>
                     </div>

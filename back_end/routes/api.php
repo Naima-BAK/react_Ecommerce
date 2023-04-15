@@ -23,6 +23,7 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){
     Route::get('view_category',[CategoryController::class,'index']);
     Route::get('edit_category/{id}',[CategoryController::class,'edit']);
     Route::put('update_category/{id}',[CategoryController::class,'update']);
+    Route::delete('delete_category/{id}',[CategoryController::class,'destroy']);
 
 
 

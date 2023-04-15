@@ -126,8 +126,30 @@ class CategoryController extends Controller
                 }
 
 
-
-
+// la fontion destroy pour supprimer une categorie dans la base de donnes
+               public function destroy($id)
+    {
+        
+       
+        $category = Category::find($id);
+        
+        if($category)
+        {
+            $category->delete();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Catégorie supprimée avec succès',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'Catégorie non trouvé!',
+            ]);
+        }
+        
+    }
               
           
 }
